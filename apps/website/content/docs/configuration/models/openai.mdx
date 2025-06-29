@@ -1,0 +1,69 @@
+---
+title: OpenAI
+description: OpenAI Model
+---
+
+# OpenAI TTS Model
+
+The OpenAI TTS provider enables text-to-speech synthesis using OpenAI's API. This provider supports streaming audio output and can be configured for different voices, models, formats, and speed.
+
+## Configuration
+
+Add the following configuration to enable the OpenAI TTS provider:
+
+```json
+{
+  "provider": "openai",
+  "config": {
+    "apiKey": "<YOUR_OPENAI_API_KEY>",
+    "model": "tts-1",           // Optional: OpenAI TTS model (default: "tts-1")
+    "voice": "alloy",           // Optional: Voice name (default: "alloy")
+    "response_format": "mp3",   // Optional: Audio format (default: "mp3")
+    "speed": 1                  // Optional: Speech speed (default: 1, range: 0.25–4)
+  }
+}
+```
+
+### Options
+
+| Option          | Type     | Default    | Description                                                                 |
+|-----------------|----------|------------|-----------------------------------------------------------------------------|
+| apiKey          | string   | (required) | Your OpenAI API key.                                                        |
+| model           | enum     | "tts-1"    | The OpenAI TTS model to use. One of: `"tts-1"`, `"tts-1-hd"`, `"gpt-4o-mini-tts"` |
+| voice           | enum     | "alloy"    | The voice to use for speech synthesis. See [OpenAI docs](https://platform.openai.com/docs/api-reference/audio/createSpeech) for available voices. |
+| response_format | enum     | "mp3"      | The audio format. One of: `"mp3"`, `"opus"`, `"aac"`, `"flac"`, `"wav"`, `"pcm"` |
+| speed           | number   | 1          | Speech speed. Range: 0.25 (slowest) to 4 (fastest). Optional.               |
+
+## Environment Variables
+
+You can also set your API key using the `OPENAI_API_KEY` environment variable:
+
+```sh
+export OPENAI_API_KEY=sk-...
+```
+
+## Usage
+
+Once configured, the OpenAI TTS provider will generate speech audio from text input using the specified model, voice, format, and speed. Audio is streamed in real time as it is generated.
+
+## Requirements
+
+- An active OpenAI account and API key.
+- The `openai` Node.js SDK installed in your project.
+
+## Example
+
+```json
+{
+  "provider": "openai",
+  "config": {
+    "apiKey": "sk-...",
+    "model": "tts-1-hd",
+    "voice": "nova",
+    "response_format": "wav",
+    "speed": 1.2
+  }
+}
+```
+
+For more details, see
