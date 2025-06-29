@@ -1,9 +1,11 @@
 import { z } from "zod";
 import { CartesiaTTS, cartesiaTTSConfigSchema } from "./providers/cartesia";
+import { OpenAiTTS, openaiTTSConfigSchema } from "./providers/openai";
 
 // Providers
 export const ttsProviders = {
   cartesia: { class: CartesiaTTS, configSchema: cartesiaTTSConfigSchema },
+  openai: { class: OpenAiTTS, configSchema: openaiTTSConfigSchema },
 } as const;
 
 export type TTSProvider = (typeof ttsProviders)[keyof typeof ttsProviders]["class"];
